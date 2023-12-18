@@ -223,6 +223,10 @@ public class XWPFNumbering extends POIXMLDocumentPart {
             CTAbstractNum ctAbstractNum = ctNumbering.addNewAbstractNum();
             ctAbstractNum.set(abstractNum.getAbstractNum());
             abstractNum.setCtAbstractNum(ctAbstractNum);
+            if (abstractNum.getAbstractNum().getAbstractNumId() == null) {
+                BigInteger id = findNextAbstractNumberingId();
+                abstractNum.getAbstractNum().setAbstractNumId(id);
+            }
         } else {
             abstractNum.setCtAbstractNum(ctNumbering.addNewAbstractNum());
             BigInteger id = findNextAbstractNumberingId();
