@@ -87,6 +87,24 @@ class TestXWPFNumbering {
     }
 
     @Test
+    void testAddAbstractNumIfAbstractNumNotEqualNullWhenNoAbstractNumId() throws IOException {
+        XWPFDocument docOut = new XWPFDocument();
+        XWPFNumbering numbering = docOut.createNumbering();
+
+        CTAbstractNum cTAbstractNum = CTAbstractNum.Factory.newInstance();
+        XWPFAbstractNum abstractNum = new XWPFAbstractNum(cTAbstractNum);
+        BigInteger abstractNumId = numbering.addAbstractNum(abstractNum);
+        BigInteger numId = numbering.addNum(abstractNumId);
+
+        XWPFDocument docIn = XWPFTestDataSamples.writeOutAndReadBack(docOut);
+
+        numbering = docIn.getNumbering();
+        XWPFNum num = numbering.getNum(numId);
+        BigInteger compareAbstractNum = num.getCTNum().getAbstractNumId().getVal();
+        assertEquals(abstractNumId, compareAbstractNum);
+    }
+
+    @Test
     void testAddAbstractNumIfAbstractNumEqualNull() throws IOException {
         XWPFDocument docOut = new XWPFDocument();
         XWPFNumbering numbering = docOut.createNumbering();
