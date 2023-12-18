@@ -87,7 +87,7 @@ class TestXWPFNumbering {
     }
 
    @Test
-    void testAddAbstractNumIfAbstractNumNotEqualNull() throws IOException {
+    void testAddAbstractNumIfAbstractNumNotEqualNull2() throws IOException {
        throw new RuntimeException();
     }
 
